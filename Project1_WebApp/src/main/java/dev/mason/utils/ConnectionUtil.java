@@ -20,18 +20,12 @@ public class ConnectionUtil {
 	
 	private static void initConn() {
 		if(conn==null) {
-			try(FileInputStream in = new FileInputStream("src/main/resources/connection.properties")) {
-				Properties props = new Properties();
-				props.load(in);
+			try{
 				Class.forName("org.mariadb.jdbc.Driver");
-				conn = DriverManager.getConnection(props.getProperty("conn"));				
+				conn = DriverManager.getConnection("jdbc:mariadb://kweldb.c4zod4lc7ws5.us-east-2.rds.amazonaws.com:3306/ReimbursementAppDB?user=admin&password=password");				
 			} catch (SQLException e) {
 				e.printStackTrace();
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
+			}catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
 		}
