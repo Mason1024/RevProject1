@@ -1,4 +1,5 @@
 let user;
+let server = "http://ec2-52-14-82-74.us-east-2.compute.amazonaws.com:8080/Project1_WebApp";
 
 //LoginPage JS
     function login(){
@@ -33,7 +34,7 @@ let user;
                 }
             }
         }
-        xhttp.open("post", "http://localhost:8080/Project1_WebApp/login.do", true);
+        xhttp.open("post", `${server}/login.do`, true);
         xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xhttp.send(`username=${uname}&password=${pass}`);
     }
@@ -49,7 +50,7 @@ let user;
                     getAndUpdateById(id);
                 }
             }
-            xhttp.open("post", "http://localhost:8080/Project1_WebApp/approve.do", true);
+            xhttp.open("post", `${server}/approve.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             console.log(`Approve sent - ${reimbursement}`);
             xhttp.send(`reimbursement=${reimbursement}`);
@@ -64,7 +65,7 @@ let user;
                     getAndUpdateById(id);
                 }
             }
-            xhttp.open("post", "http://localhost:8080/Project1_WebApp/reject.do", true);
+            xhttp.open("post", `${server}/reject.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhttp.send(`reimbursement=${reimbursement}`);
         }
@@ -182,7 +183,7 @@ let user;
                     updateManagerRow(this.responseText);
                 }
             }
-            xhttp.open("post", "http://localhost:8080/Project1_WebApp/getReimbursementById.do", true);
+            xhttp.open("post", `${server}/getReimbursementById.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             console.log(`GetAndUpdateByID sent 'r_id=${id}'`);
             xhttp.send(`r_id=${id}`);
@@ -199,7 +200,7 @@ let user;
                     });                  
                 }
             }
-            xhttp.open("post", "http://localhost:8080/Project1_WebApp/getAllReimbursements.do", true);
+            xhttp.open("post", `${server}/getAllReimbursements.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhttp.send();
         }
@@ -306,7 +307,7 @@ let user;
                 }      
             }
         }
-        xhttp.open("post", "http://localhost:8080/Project1_WebApp/openReimbursement.do", true);
+        xhttp.open("post", `${server}/openReimbursement.do`, true);
         xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xhttp.send(`description=${desc}&amount=${amount}`);
     }
@@ -349,7 +350,7 @@ let user;
                 });                  
             }
         }
-        xhttp.open("post", "http://localhost:8080/Project1_WebApp/getAllReimbursementsByUser.do", true);
+        xhttp.open("post", `${server}/getAllReimbursementsByUser.do`, true);
         xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xhttp.send();
     }
