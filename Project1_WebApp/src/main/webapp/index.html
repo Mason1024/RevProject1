@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+    <head>
+        <title>Lonely Mountain Miners Union</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="LOTR.css" type="text/css" charset="utf-8" />
+        <script src="lotrJS.js"></script>
+    </head>
+    <body id="body" style="background-image: url('map.jpeg');">
+        <div id="LoginPage" style="display: block;">
+            <div class="boxDiv" >
+                <h3>Lonely Mountain Miners Union</h3>
+                <table style="margin: auto">
+                    <tr>
+                        <td>Username</td>
+                        <td><input id="uname" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input id="pass" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="login()">Login</button></td>
+                        <td><button>New User</button></td>
+                    </tr>
+                    <tr><td id="ErrorBox" style="color: firebrick"></td></tr>
+                </table>
+            </div>
+        </div>
+        <div id="UserPage" style="display: none;">
+            <div id="UserTopBar" class="container" style="margin-top: 10px">
+                <table width=100%>
+                    <tr>
+                        <td><h3>Miner's Portal</h3></td>
+                        <td>
+                            <table>
+                                <tr>
+                                    <td colspan="3">Submit a reinbursement</td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td>Amount</td>
+                                    <td><input id="inputAmount" type="text"></td>
+                                    <td>
+                                        <button id="submitBtn" onclick="submit()">Submit</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Description</td>
+                                    <td><input id="inputDesc" type="text"></td>
+                                    <td>
+                                        <button id="clearBtn">Clear</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="submitError"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="UserMainArea" class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Submitted On</th>
+                            <th>Status</th>
+                            <th>Proccessed By</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody id="UserTable"></tbody>
+                </table>
+            </div>
+        </div>
+        <div id="ManagerPage" style="display: none;">
+            <div id="ManagerTopBar" class="container" style="margin-top: 10px">
+                <table width=100%>
+                    <tr>
+                        <td><h3>Supervisor Portal</h3></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="ManagerMainArea" class="container">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th onclick="sortManagerTable(0)">ID</th>
+                            <th onclick="sortManagerTable(1)">Submitted By</th>
+                            <th onclick="sortManagerTable(2)">Description</th>
+                            <th onclick="sortManagerTable(3)">Amount</th>
+                            <th onclick="sortManagerTable(8)">Submitted On</th>
+                            <th onclick="sortManagerTable(5)">Status</th>
+                            <th onclick="sortManagerTable(6)">Proccessed By</th>
+                            <th onclick="sortManagerTable(7)">Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ManagerTable"></tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

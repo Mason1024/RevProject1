@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<meta charset="utf-8"/>
+<html>
+    <head>
+
+        <title>Login Page</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="LOTR.css" type="text/css" charset="utf-8" />
+        <script src="myJS.js"></script>
+        <style>
+            .boxDiv{
+                max-width: 350px;
+                margin: 10px 15% auto auto;
+                padding: 10px;
+                border:1px solid black;
+                border-radius: 10px;
+                background-color: rgb(172, 157, 90);
+                text-align: center;
+            }
+            body{
+                background-image: url("map.jpeg");
+            }  
+        </style>
+    </head>
+    <body>
+        <div id="content">
+            <div class="boxDiv" >
+                <h3>Misty Mountains Vault</h3>
+                <table style="margin: auto">
+                    <tr>
+                        <td>Username</td>
+                        <td><input id="uname" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td>Password</td>
+                        <td><input id="pass" type="password"></td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="login()">Login</button></td>
+                        <td><button>New User</button></td>
+                    </tr>
+                    <tr><td id="ErrorBox" style="color: firebrick"></td></tr>
+                </table>
+            </div>
+        </div>
+    </body>
+    <script>
+        function login(){
+
+            let uname = document.getElementById("uname").value;
+            let pass = document.getElementById("pass").value;
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function(){
+                if(this.readyState === 4 && this.status === 200){
+                    if(this.responseText==-1){
+                        document.getElementById("ErrorBox").innerHTML="Login Failed";
+                    }else{
+                        // document.location=this.responseText;
+                        document.getElementById("content").innerHTML=this.responseText;
+                        populateTable();
+                    }
+                }
+            }
+            xhttp.open("post", "http://localhost:8080/Project1_WebApp/login.do", true);
+            xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhttp.send(`username=${uname}&password=${pass}`);
+        }
+    </script>
+</html>

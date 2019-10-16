@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'ringbearermedium';
+    src: url('ringbearermedium-w173-webfont.woff2') format('woff2'),
+         url('ringbearermedium-w173-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family: 'ringbearermedium', Arial, sans-serif;
+    background-color: rgb(119, 109, 63);
+    /* background-image: url("map.jpeg"); */
+    background-repeat: no-repeat;
+    background-position-x: center;
+}  
+button{
+    background-color: rgb(158, 144, 82);
+    border: 1px solid black;
+    border-radius: 4px;
+}
+thead{
+    background-color: rgb(172, 157, 90);
+}
+.table-striped>tbody>tr:nth-child(odd)>td, 
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: rgb(158, 144, 82);
+}
+.table-striped>tbody>tr:nth-child(even)>td, 
+.table-striped>tbody>tr:nth-child(even)>th {
+    background-color: rgb(153, 135, 65);
+}
+.boxDiv{
+    max-width: 350px;
+    margin: 10px 15% auto auto;
+    padding: 10px;
+    border:1px solid black;
+    border-radius: 10px;
+    background-color: rgb(172, 157, 90);
+    text-align: center;
+}

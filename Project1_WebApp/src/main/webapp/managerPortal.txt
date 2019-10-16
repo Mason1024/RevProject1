@@ -1,0 +1,25 @@
+<div id="topBar" class="container" style="margin-top: 10px">
+    <table width=100%>
+        <tr>
+            <td><h3>Supervisor Portal</h3></td>
+        </tr>
+    </table>
+</div>
+<div id="mainArea" class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Submitted By</th>
+                <th>Description</th>
+                <th>Amount</th>
+                <th>Submitted On</th>
+                <th>Status</th>
+                <th>Proccessed By</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody id="itemsTable">
+        </tbody>
+    </table>
+</div>
