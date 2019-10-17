@@ -23,6 +23,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                 //unpopulate tables
                 MTable.innerHTML="";
                 UTable.innerHTML="";
+                clearUserInput();
             }
         }
         xhttp.open("post", `${server}/logout.do`, true);
@@ -388,3 +389,5 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
         xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xhttp.send();
     }
+
+    clearUserInput = ()=>{document.getElementById('inputAmount').value='0';document.getElementById('inputDesc').value=''}
