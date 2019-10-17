@@ -47,7 +47,7 @@ public class MasterServlet extends HttpServlet {
 				sc.getAllReimbursements(request, response);
 				break;
 			case "/Project1_WebApp/coffee.do":
-				response.setStatus(418);
+				response.sendError(418);
 				break;
 		}
 	}
