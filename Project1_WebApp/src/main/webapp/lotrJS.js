@@ -45,11 +45,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let reimbursement = getRowData(id);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){
-                if(this.readyState === 4 && this.status === 200){
-                    getAndUpdateById(id);
-                }
-            }
+            xhttp.onreadystatechange = reviewCallback();
             xhttp.open("post", `${server}/approve.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             console.log(`Approve sent - ${reimbursement}`);
@@ -60,14 +56,16 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let reimbursement = getRowData(id);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function(){
-                if(this.readyState === 4 && this.status === 200){
-                    getAndUpdateById(id);
-                }
-            }
+            xhttp.onreadystatechange = reviewCallback();
             xhttp.open("post", `${server}/reject.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhttp.send(`reimbursement=${reimbursement}`);
+        }
+
+        function reviewCallback(){
+            if(this.readyState === 4 && this.status === 200){
+                getAndUpdateById(id);
+            }
         }
 
         function getRowData(id){
@@ -102,7 +100,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                         throw breakException; //throw exception to break from forEach
                     }
                 });
-            }catch(e){};
+            }catch(e){}
             return outJson;
         }
 
@@ -171,7 +169,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                         throw breakException; //throw exception to break from forEach
                     }
                 });
-            }catch(e){};
+            }catch(e){}
         }
 
         let getAndUpdateById = function(id){
@@ -228,21 +226,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                     y = rows[i + 1].getElementsByTagName("TD")[n];
                     /* Check if the two rows should switch place,
                     based on the direction, asc or desc: */
-                    if(n===3){ //sort by price
-                        if (dir == "asc") {
-                            if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                                // If so, mark as a switch and break the loop:
-                                shouldSwitch = true;
-                                break;
-                            }
-                        } else if (dir == "desc") {
-                            if (Number(x.innerHTML) < Number(y.innerHTML)) {
-                                // If so, mark as a switch and break the loop:
-                                shouldSwitch = true;
-                                break;
-                            }
-                        }
-                    }else if(n===8){ //sort by date
+                    if(n===3 || n===8){ //sort by Price or Date
                         if (dir == "asc") {
                             if (Number(x.innerHTML) > Number(y.innerHTML)) {
                                 // If so, mark as a switch and break the loop:
@@ -299,7 +283,6 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
 
         xhttp.onreadystatechange = function(){
             if(this.readyState === 4 && this.status === 200){
-                let items = JSON.parse(this.responseText);
                 if(this.responseText=="fail"){
                     document.getElementById("submitError").innerHTML="Submit Failed";
                 }else{
