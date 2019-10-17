@@ -340,7 +340,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhttp.send();
         }
-        function addManagerRow(dataJSON){
+        function addStatRow(dataJSON){
             let STable = document.getElementById('ManagerStats'); 
             let data = JSON.parse(dataJSON);
 
