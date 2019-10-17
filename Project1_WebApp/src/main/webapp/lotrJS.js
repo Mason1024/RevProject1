@@ -12,6 +12,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                 let UPage = document.getElementById("UserPage");
                 let MPage = document.getElementById("ManagerPage");
                 let MTable = document.getElementById('ManagerTable'); 
+                let STable = document.getElementById('ManagerStats'); 
                 let UTable = document.getElementById('UserTable'); 
 
                 //change visiblity
@@ -22,6 +23,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
 
                 //unpopulate tables
                 MTable.innerHTML="";
+                STable.innerHTML="";
                 UTable.innerHTML="";
                 clearUserInput();
             }
@@ -59,6 +61,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                         MPage.style.display = "block";
                         body.style.backgroundImage = "";
                         populateManagerTable();
+                        getStats();
                     }else{
                         LPage.style.display = "none";
                         UPage.style.display = "block";
@@ -320,6 +323,44 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                     }
                 }
             }
+        }
+
+        function getStats(){
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.onreadystatechange = function(){
+                if(this.readyState === 4 && this.status === 200){
+                    let items = JSON.parse(this.responseText);
+                    items.forEach(element => {
+                        addStatRow(JSON.stringify(element));
+                    });                  
+                }
+            }
+            xhttp.open("post", `${server}/getManagerStats.do`, true);
+            xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhttp.send();
+        }
+        function addManagerRow(dataJSON){
+            let STable = document.getElementById('ManagerStats'); 
+            let data = JSON.parse(dataJSON);
+
+            let string = `<tr>`;
+                string+= `<td>${data.username}</td>`;
+                string+= `<td>${data.approves}</td>`;
+                string+= `<td>${data.rejects}</td>`;
+                string+= `<td>${data.largest}</td>`;
+                string+= `<td>${data.average}</td>`;
+                string+= `</tr>`;
+            STable.innerHTML+=string;
+        }
+
+        function displayReimursements(){
+            document.getElementById("ManagerReimbursements").style.display = "block";
+            document.getElementById("ManagerStatistics").style.display = "none";
+        }
+        function displayStatisitics(){
+            document.getElementById("ManagerReimbursements").style.display = "none";
+            document.getElementById("ManagerStatistics").style.display = "block";
         }
 
 //Users Page

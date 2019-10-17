@@ -39,7 +39,7 @@
                         <td>
                             <table>
                                 <tr>
-                                    <td colspan="3">Submit a reinbursement</td>
+                                    <td colspan="3">Submit a reimbursement</td>
                                     
                                 </tr>
                                 <tr>
@@ -50,7 +50,7 @@
                                 <tr>
                                     <td>Description</td>
                                     <td><input id="inputDesc" type="text" style="width: 90%;"></td>
-                                    <td><button onclick="()=>{document.getElementById('inputAmount').value='0';document.getElementById('inputDesc').value=''}">Clear</button></td>
+                                    <td><button onclick="clearUserInput()">Clear</button></td>
                                 </tr>
                             </table>
                         </td>
@@ -81,12 +81,16 @@
                 <table width=100%>
                     <tr>                       
                         <td><h3>Supervisor Portal</h3></td>
+                        <td>
+                            <button onclick="displayReimursements()">Reimbursements</button>
+                            <button onclick="displayStatistics()">Statistics</button>
+                        </td>
                         <td><button onclick="logout()">Logout</button></td>
                     </tr>
                 </table>
             </div>
             <div id="ManagerMainArea" class="container">
-                <table class="table table-striped">
+                <table id="ManagerReimbursements" class="table table-striped">
                     <thead>
                         <tr>
                             <th onclick="sortManagerTable(0)">ID</th>
@@ -100,6 +104,18 @@
                         </tr>
                     </thead>
                     <tbody id="ManagerTable"></tbody>
+                </table>
+                <table id="ManagerStatistics" class="table table-striped" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>Manager</th>
+                                <th># of Approvals</th>
+                                <th># of Rejects</th>
+                                <th>Largest Approval</th>
+                                <th>Average Approval</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ManagerStats"></tbody>
                 </table>
             </div>
         </div>

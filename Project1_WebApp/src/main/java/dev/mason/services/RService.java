@@ -44,6 +44,11 @@ public class RService implements ReimbursementService{
 	}
 	
 	@Override
+	public Set<User> getAllUsers(){
+		return udao.getAllUsers();
+	}
+	
+	@Override
 	public Reimbursement openReimbursement(User employee, String desc, double price) {
 		if(employee.getIsManager()==0) {
 			Reimbursement r = new Reimbursement(0, employee.getUsername(), "", desc, price, System.currentTimeMillis(), "", 0);
@@ -88,17 +93,17 @@ public class RService implements ReimbursementService{
 	}
 
 	@Override
-	public Set<Reimbursement> getReimbursementByUser(int submitter) {
+	public Set<Reimbursement> getReimbursementsByUser(int submitter) {
 		return rdao.getAllReimbursementsFromUser(submitter);
 	}
 	
 	@Override
-	public Set<Reimbursement> getReimbursementByApprover(int approver) {
+	public Set<Reimbursement> getReimbursementsByApprover(int approver) {
 		return rdao.getAllReimbursementsFromUser(approver);
 	}
 
 	@Override
-	public Set<Reimbursement> getAllReimbursement() {
+	public Set<Reimbursement> getAllReimbursements() {
 		return rdao.getAllReimbursements();
 	}
 

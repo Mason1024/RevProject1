@@ -1,6 +1,7 @@
 package dev.mason.controllers;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -89,7 +90,7 @@ public class ServiceController {
 		}
 	}
 	public void getAllReimbursementsByUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Set<Reimbursement> rSet = rs.getReimbursementByUser(((User)request.getSession().getAttribute("User")).getU_id());
+		Set<Reimbursement> rSet = rs.getReimbursementsByUser(((User)request.getSession().getAttribute("User")).getU_id());
 		if(!rSet.isEmpty()) {
 			Gson gson = new Gson();
 			String json = gson.toJson(rSet);
@@ -100,7 +101,7 @@ public class ServiceController {
 		}
 	}
 	public void getAllReimbursementsByManager(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Set<Reimbursement> rSet = rs.getReimbursementByApprover(Integer.parseInt(request.getParameter("approver")));
+		Set<Reimbursement> rSet = rs.getReimbursementsByApprover(Integer.parseInt(request.getParameter("approver")));
 		if(!rSet.isEmpty()) {
 			Gson gson = new Gson();
 			String json = gson.toJson(rSet);
@@ -111,7 +112,7 @@ public class ServiceController {
 		}
 	}
 	public void getAllReimbursements(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		Set<Reimbursement> rSet = rs.getAllReimbursement();
+		Set<Reimbursement> rSet = rs.getAllReimbursements();
 		if(!rSet.isEmpty()) {
 			Gson gson = new Gson();
 			String json = gson.toJson(rSet);
@@ -121,5 +122,57 @@ public class ServiceController {
 			response.getWriter().append("fetch failed");
 		}
 	}
-	
+	public void getStats(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Set<Stat> stats = new HashSet<Stat>();
+		for(User u:rs.getAllUsers()) {
+			if(u.getIsManager()==1) {
+				int approves=0;
+				int rejects=0;
+				double largest=0.0;
+				double sum=0.0;
+				int count=0;
+				double average=0.0;				
+				for(Reimbursement r:rs.getReimbursementsByApprover(u.getU_id())) {
+					count++;
+					if(r.getState()==1) approves++;
+					if(r.getState()==2) rejects++;
+					if(r.getPrice()>largest) largest=r.getPrice();
+					sum+=r.getPrice();
+				}	
+				average=sum/count;
+				stats.add(new Stat(u.getUsername(),approves,rejects,largest,average));
+			}
+		}
+		
+		Gson gson = new Gson();
+		String json = gson.toJson(stats);
+		response.getWriter().append(json);
+		
+	}
+	private class Stat{
+		String username;
+		int approves;
+		int rejects;
+		double largest;
+		double average;
+		
+		public Stat() {	}
+		public Stat(String username, int approves, int rejects, double largest, double average) {
+			this.username=username;
+			this.approves=approves;
+			this.rejects=rejects;
+			this.largest=largest;
+			this.average=average;
+		}
+		public String getUsername() {return this.username;}
+		public void setUsername(String username) {this.username=username;}
+		public int getApproves() {return this.approves;}
+		public void setApproves(int approves) {this.approves=approves;}
+		public int getRejects() {return this.rejects;}
+		public void setRejects(int rejects) {this.rejects=rejects;}
+		public double getLargest() {return this.largest;}
+		public void setRejects(double largest) {this.largest=largest;}
+		public double getAverage() {return this.average;}
+		public void setAverage(double average) {this.average=average;}
+	}
 }
