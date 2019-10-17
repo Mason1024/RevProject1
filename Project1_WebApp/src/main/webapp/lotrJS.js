@@ -38,7 +38,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
         xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xhttp.send(`username=${uname}&password=${pass}`);
     }
-
+    
     function makeCoffee(){
         let xhttp = new XMLHttpRequest();
 
@@ -53,38 +53,6 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
         xhttp.open("post", `${server}/coffee.do`, true);
         xhttp.send();
     }
-
-    xhttp.onreadystatechange = function(){
-            if(this.readyState === 4 && this.status === 200){
-                if(this.responseText==-1){
-                    document.getElementById("ErrorBox").innerHTML="Login Failed";
-                }else{
-                    user = JSON.parse(this.responseText);
-
-                    let body = document.getElementById("body");
-                    let LPage = document.getElementById("LoginPage");
-                    let UPage = document.getElementById("UserPage");
-                    let MPage = document.getElementById("ManagerPage");
-
-                    if(user.isManager===1){
-                        LPage.style.display = "none";
-                        MPage.style.display = "block";
-                        body.style.backgroundImage = "";
-                        populateManagerTable();
-                    }else{
-                        LPage.style.display = "none";
-                        UPage.style.display = "block";
-                        body.style.backgroundImage = "";
-                        populateUserTable();
-                    }
-                }
-            }
-        }
-        xhttp.open("post", `${server}/login.do`, true);
-        xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        xhttp.send(`username=${uname}&password=${pass}`);
-    }
-
 
 //Manager Page
         let approve = function(id){
