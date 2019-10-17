@@ -140,7 +140,7 @@ public class ServiceController {
 					sum+=r.getPrice();
 				}	
 				average=sum/count;
-				stats.add(new Stat(u.getUsername(),approves,rejects,largest,average));
+				stats.add(new Stat(u.getUsername(),approves,rejects,(int)largest,(int)average));
 			}
 		}
 		
@@ -153,11 +153,11 @@ public class ServiceController {
 		String username;
 		int approves;
 		int rejects;
-		double largest;
-		double average;
+		int largest;
+		int average;
 		
 		public Stat() {	}
-		public Stat(String username, int approves, int rejects, double largest, double average) {
+		public Stat(String username, int approves, int rejects, int largest, int average) {
 			this.username=username;
 			this.approves=approves;
 			this.rejects=rejects;
@@ -170,9 +170,9 @@ public class ServiceController {
 		public void setApproves(int approves) {this.approves=approves;}
 		public int getRejects() {return this.rejects;}
 		public void setRejects(int rejects) {this.rejects=rejects;}
-		public double getLargest() {return this.largest;}
-		public void setRejects(double largest) {this.largest=largest;}
-		public double getAverage() {return this.average;}
-		public void setAverage(double average) {this.average=average;}
+		public int getLargest() {return this.largest;}
+		public void setLargest(int largest) {this.largest=largest;}
+		public int getAverage() {return this.average;}
+		public void setAverage(int average) {this.average=average;}
 	}
 }

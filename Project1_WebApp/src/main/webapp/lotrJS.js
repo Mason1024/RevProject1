@@ -358,7 +358,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             document.getElementById("ManagerReimbursements").style.display = "block";
             document.getElementById("ManagerStatistics").style.display = "none";
         }
-        function displayStatisitics(){
+        function displayStatistics(){
             document.getElementById("ManagerReimbursements").style.display = "none";
             document.getElementById("ManagerStatistics").style.display = "block";
         }
