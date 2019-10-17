@@ -15,7 +15,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                 let UTable = document.getElementById('UserTable'); 
 
                 //change visiblity
-                body.style.backgroundImage = "map.jpeg";
+                body.style.backgroundImage = "url('map.jpeg')";
                 LPage.style.display = "block";
                 MPage.style.display = "none";
                 UPage.style.display = "none";
