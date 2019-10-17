@@ -364,7 +364,6 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                 string+= `<td>Pending</td>`;
             }
             string+= `<td>${data.approver}</td>`;
-            string+= `<td>${data.approver}</td>`;
             if(data.comment){
                 string+= `<td>${data.comment}</td>`;
             }else{
