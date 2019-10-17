@@ -44,17 +44,13 @@
                                 </tr>
                                 <tr>
                                     <td>Amount</td>
-                                    <td><input id="inputAmount" type="number"></td>
-                                    <td>
-                                        <button id="submitBtn" onclick="submit()">Submit</button>
-                                    </td>
+                                    <td><input id="inputAmount" type="number" style="width: 90%;"></td>
+                                    <td><button onclick="submit()">Submit</button></td>
                                 </tr>
                                 <tr>
                                     <td>Description</td>
-                                    <td><input id="inputDesc" type="text"></td>
-                                    <td>
-                                        <button id="clearBtn">Clear</button>
-                                    </td>
+                                    <td><input id="inputDesc" type="text" style="width: 90%;"></td>
+                                    <td><button onclick="()=>{document.getElementById('inputAmount').value='0';document.getElementById('inputDesc').value=''}">Clear</button></td>
                                 </tr>
                             </table>
                         </td>
