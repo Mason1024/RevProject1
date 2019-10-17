@@ -90,7 +90,7 @@ public class ServiceController {
 	}
 	public void getAllReimbursementsByUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Set<Reimbursement> rSet = rs.getReimbursementByUser(((User)request.getSession().getAttribute("User")).getU_id());
-		if(rSet.size()!=0) {
+		if(rSet.isEmpty()) {
 			Gson gson = new Gson();
 			String json = gson.toJson(rSet);
 			response.getWriter().append(json);
@@ -101,7 +101,7 @@ public class ServiceController {
 	}
 	public void getAllReimbursementsByManager(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Set<Reimbursement> rSet = rs.getReimbursementByApprover(Integer.parseInt(request.getParameter("approver")));
-		if(rSet.size()!=0) {
+		if(rSet.isEmpty()) {
 			Gson gson = new Gson();
 			String json = gson.toJson(rSet);
 			response.getWriter().append(json);
@@ -112,7 +112,7 @@ public class ServiceController {
 	}
 	public void getAllReimbursements(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Set<Reimbursement> rSet = rs.getAllReimbursement();
-		if(rSet.size()!=0) {
+		if(rSet.isEmpty()) {
 			Gson gson = new Gson();
 			String json = gson.toJson(rSet);
 			response.getWriter().append(json);
