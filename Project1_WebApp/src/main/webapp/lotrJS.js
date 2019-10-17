@@ -1,6 +1,39 @@
 let user;
 let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Project1_WebApp";
 
+    function logout(){
+        let xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState === 4 && this.status === 200){
+                user = null;
+
+                let body = document.getElementById("body");
+                let LPage = document.getElementById("LoginPage");
+                let UPage = document.getElementById("UserPage");
+                let MPage = document.getElementById("ManagerPage");
+                let MTable = document.getElementById('ManagerTable'); 
+                let UTable = document.getElementById('UserTable'); 
+
+                //change visiblity
+                body.style.backgroundImage = "map.jpeg";
+                LPage.style.display = "block";
+                MPage.style.display = "none";
+                UPage.style.display = "none";
+
+                //unpopulate tables
+                MTable.innerHTML="";
+                UTable.innerHTML="";
+            }
+        }
+        xhttp.open("post", `${server}/logout.do`, true);
+        xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        xhttp.send(`username=${uname}&password=${pass}`);
+    }
+
+
+
+
+
 //LoginPage JS
     function login(){
 

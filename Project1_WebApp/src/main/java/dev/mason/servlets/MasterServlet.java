@@ -25,6 +25,9 @@ public class MasterServlet extends HttpServlet {
 			case "/Project1_WebApp/login.do":
 				sc.login(request, response);
 				break;
+			case "/Project1_WebApp/logout.do":
+				request.getSession().invalidate();
+				break;
 			case "/Project1_WebApp/openReimbursement.do":
 				sc.openReimbursement(request, response);
 				break;
