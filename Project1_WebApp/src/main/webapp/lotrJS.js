@@ -38,7 +38,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
         xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         xhttp.send(`username=${uname}&password=${pass}`);
     }
-    
+
     function makeCoffee(){
         let xhttp = new XMLHttpRequest();
 
@@ -47,7 +47,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
               
             }
             if(this.readyState === 4 && this.status === 418){
-                
+                document.getElementsByTagName("html")[0].innerHTML=this.responseText;
             }
         }
         xhttp.open("post", `${server}/coffee.do`, true);
