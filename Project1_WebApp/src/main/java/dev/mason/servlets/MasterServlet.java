@@ -47,8 +47,7 @@ public class MasterServlet extends HttpServlet {
 				sc.getAllReimbursements(request, response);
 				break;
 			case "/Project1_WebApp/coffee.do":
-				response.sendError(418, "418 I'm a teapot\r\n" + 
-						"\r\n" + 
+				response.sendError(418,
 						"   Any attempt to brew coffee with a teapot should result in the error\r\n" + 
 						"   code \"418 I'm a teapot\". The resulting entity body MAY be short and\r\n" + 
 						"   stout.");
