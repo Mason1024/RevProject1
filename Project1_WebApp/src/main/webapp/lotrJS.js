@@ -433,7 +433,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
         xhttp.send();
     }
 
-    clearUserInput = function(){
+    let clearUserInput = function(){
         document.getElementById('inputAmount').value='0';
         document.getElementById('inputDesc').value='';
     }
