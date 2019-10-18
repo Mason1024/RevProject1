@@ -99,7 +99,7 @@ public class RService implements ReimbursementService{
 	
 	@Override
 	public Set<Reimbursement> getReimbursementsByApprover(int approver) {
-		return rdao.getAllReimbursementsFromUser(approver);
+		return rdao.getAllReimbursementsFromApprover(approver);
 	}
 
 	@Override

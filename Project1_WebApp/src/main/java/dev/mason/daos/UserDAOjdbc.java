@@ -93,7 +93,7 @@ public class UserDAOjdbc implements UserDAO{
 			
 			Set<User> users = new HashSet<User>();
 			
-			if(rs!=null&&rs.next()) {
+			while(rs.next()) {
 				User user = new User(
 								rs.getInt("u_id"), 
 								rs.getString("username"), 

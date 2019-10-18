@@ -1,5 +1,6 @@
 let user;
 let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Project1_WebApp";
+// let server = "http://localhost:8080/Project1_WebApp";
 
     function logout(){
         let xhttp = new XMLHttpRequest();

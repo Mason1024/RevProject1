@@ -125,22 +125,25 @@ public class ServiceController {
 	public void getStats(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Set<Stat> stats = new HashSet<Stat>();
 		for(User u:rs.getAllUsers()) {
+			System.out.println("User - "+u);
 			if(u.getIsManager()==1) {
+				System.out.println("Manager");
 				int approves=0;
 				int rejects=0;
 				double largest=0.0;
 				double sum=0.0;
-				int count=0;
 				double average=0.0;				
 				for(Reimbursement r:rs.getReimbursementsByApprover(u.getU_id())) {
-					count++;
+					System.out.println("Reim - "+r);
 					if(r.getState()==1) approves++;
 					if(r.getState()==2) rejects++;
 					if(r.getPrice()>largest) largest=r.getPrice();
 					sum+=r.getPrice();
 				}	
-				average=sum/count;
-				stats.add(new Stat(u.getUsername(),approves,rejects,(int)largest,(int)average));
+				average=sum/approves;
+				Stat s = new Stat(u.getUsername(),approves,rejects,(int)largest,(int)average);
+				System.out.println("Stat - "+s);
+				stats.add(s);
 			}
 		}
 		
