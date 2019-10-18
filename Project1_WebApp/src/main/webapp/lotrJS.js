@@ -97,10 +97,13 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let reimbursement = getRowData(id);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = reviewCallback;
+            xhttp.onreadystatechange = ()=>{
+                if(this.readyState === 4 && this.status === 200){
+                    getAndUpdateById(id);
+                }
+            };
             xhttp.open("post", `${server}/approve.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            console.log(`Approve sent - ${reimbursement}`);
             xhttp.send(`reimbursement=${reimbursement}`);
         }
 
@@ -108,16 +111,14 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let reimbursement = getRowData(id);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = reviewCallback;
+            xhttp.onreadystatechange = ()=>{
+                if(this.readyState === 4 && this.status === 200){
+                    getAndUpdateById(id);
+                }
+            };
             xhttp.open("post", `${server}/reject.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhttp.send(`reimbursement=${reimbursement}`);
-        }
-
-        let reviewCallback = function(){
-            if(this.readyState === 4 && this.status === 200){
-                getAndUpdateById(id);
-            }
         }
 
         function getRowData(id){
