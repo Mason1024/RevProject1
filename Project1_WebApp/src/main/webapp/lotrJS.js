@@ -98,7 +98,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let reimbursement = getRowData(id);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = ()=>{
+            xhttp.onreadystatechange = function(){
                 if(this.readyState === 4 && this.status === 200){
                     console.log(this.responseText);
                     console.log(id);
@@ -114,7 +114,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let reimbursement = getRowData(id);
 
             let xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = ()=>{
+            xhttp.onreadystatechange = function(){
                 if(this.readyState === 4 && this.status === 200){
                     console.log(this.responseText);
                     console.log(id);
