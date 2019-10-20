@@ -50,6 +50,7 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
                 if(this.responseText==-1){
                     document.getElementById("ErrorBox").innerHTML="Login Failed";
                 }else{
+                    document.getElementById("ErrorBox").innerHTML="";
                     user = JSON.parse(this.responseText);
 
                     let body = document.getElementById("body");
@@ -198,27 +199,17 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
             let breakException = {};
             let MTable = document.getElementById('ManagerTable'); 
             let data = JSON.parse(dataJSON);
-            console.log("Updating Manager Row")
-            console.log("data"+data);
             let rows = Array.prototype.slice.call(MTable.getElementsByTagName('tr'));
             try{
                 rows.forEach(row => {
-                    console.log(`Row ${row.children[0].innerHTML} - ${data.r_id}`)
                     if(row.children[0].innerHTML==data.r_id){
-
-                        console.log("State - "+data.state);
                         if(data.state===1){
                             row.children[5].innerHTML="Approved";
                         }else if(data.state===2){
                             row.children[5].innerHTML="Rejected";
                         }
-                                                
-                        console.log("Approver - "+data.approver);
                         row.children[6].innerHTML=data.approver;
-
-                        console.log("Comment - "+data.comment);
                         row.children[7].innerHTML=data.comment;
-
                         throw breakException; //throw exception to break from forEach
                     }
                 });
@@ -230,13 +221,11 @@ let server = "http://ec2-18-221-114-64.us-east-2.compute.amazonaws.com:8080/Proj
 
             xhttp.onreadystatechange = function(){
                 if(this.readyState === 4 && this.status === 200){
-                    console.log(`GetAndUpdateByID recieved - ${this.responseText}`);
                     updateManagerRow(this.responseText);
                 }
             }
             xhttp.open("post", `${server}/getReimbursementById.do`, true);
             xhttp.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            console.log(`GetAndUpdateByID sent 'r_id=${id}'`);
             xhttp.send(`r_id=${id}`);
         }
 
