@@ -61,21 +61,21 @@ public class ServiceController {
 		}
 	}
 	
-	public void approve(HttpServletRequest request, HttpServletResponse response) {
+	public void approve(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Gson gson = new Gson();
 		Reimbursement item = gson.fromJson(request.getParameter("reimbursement"), Reimbursement.class);
 		User manager = (User) request.getSession().getAttribute("User");
 		String comment = item.getComment();
-		System.out.println("SC - Approve");
 		rs.approveReimbursement(item, manager, comment);
+		response.getWriter().append("");
 	}
-	public void reject(HttpServletRequest request, HttpServletResponse response) {
+	public void reject(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Gson gson = new Gson();
 		Reimbursement item = gson.fromJson(request.getParameter("reimbursement"), Reimbursement.class);
 		User manager = (User) request.getSession().getAttribute("User");
 		String comment = item.getComment();
-		
 		rs.rejectReimbursement(item, manager, comment);
+		response.getWriter().append("");
 	}
 	
 	public void getReimbursementById(HttpServletRequest request, HttpServletResponse response) throws IOException {
