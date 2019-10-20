@@ -66,16 +66,16 @@ public class ServiceController {
 		Reimbursement item = gson.fromJson(request.getParameter("reimbursement"), Reimbursement.class);
 		User manager = (User) request.getSession().getAttribute("User");
 		String comment = item.getComment();
-		rs.approveReimbursement(item, manager, comment);
-		response.getWriter().append("");
+		boolean op = rs.approveReimbursement(item, manager, comment);
+		response.getWriter().append("Approve "+op);
 	}
 	public void reject(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Gson gson = new Gson();
 		Reimbursement item = gson.fromJson(request.getParameter("reimbursement"), Reimbursement.class);
 		User manager = (User) request.getSession().getAttribute("User");
 		String comment = item.getComment();
-		rs.rejectReimbursement(item, manager, comment);
-		response.getWriter().append("");
+		boolean op = rs.rejectReimbursement(item, manager, comment);
+		response.getWriter().append("Reject "+op);
 	}
 	
 	public void getReimbursementById(HttpServletRequest request, HttpServletResponse response) throws IOException {

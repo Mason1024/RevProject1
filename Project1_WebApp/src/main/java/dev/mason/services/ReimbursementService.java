@@ -15,8 +15,8 @@ public interface ReimbursementService {
 	public Reimbursement openReimbursement(User employee, String desc, double price);
 	public int getReimbursementStatus(int r_id);
 	
-	public void approveReimbursement(Reimbursement item, User manager, String comment);
-	public void rejectReimbursement(Reimbursement item, User manager, String comment);
+	public boolean approveReimbursement(Reimbursement item, User manager, String comment);
+	public boolean rejectReimbursement(Reimbursement item, User manager, String comment);
 		
 	public Reimbursement getReimbursementById(int r_id);
 	public Set<Reimbursement> getReimbursementsByUser(int submitter);

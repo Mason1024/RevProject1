@@ -64,27 +64,25 @@ public class RService implements ReimbursementService{
 	}
 
 	@Override
-	public void approveReimbursement(Reimbursement item, User manager, String comment) {
+	public boolean approveReimbursement(Reimbursement item, User manager, String comment) {
 		if(manager.getIsManager()==1) {
 			item.setApprover(manager.getUsername());
 			item.setComment(comment);
 			item.setState(1);
-			
-			System.out.println("RS - Approve");
-			
-			System.out.println(rdao.updateReimbursement(item));
+			return rdao.updateReimbursement(item);
 		}
+		return false;
 	}
 
 	@Override
-	public void rejectReimbursement(Reimbursement item, User manager, String comment) {
+	public boolean rejectReimbursement(Reimbursement item, User manager, String comment) {
 		if(manager.getIsManager()==1) {
 			item.setApprover(manager.getUsername());
 			item.setComment(comment);
 			item.setState(2);
-			
-			rdao.updateReimbursement(item);
+			return rdao.updateReimbursement(item);
 		}
+		return false;
 	}
 
 	@Override
